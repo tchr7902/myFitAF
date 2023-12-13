@@ -1,4 +1,4 @@
-const User = require('./user');
+const User = require('./User.js');
 const Exercise = require('./exercise'); // Represents exercise_plans
 const Nutrition = require('./nutrition'); // Represents diet_plans
 
