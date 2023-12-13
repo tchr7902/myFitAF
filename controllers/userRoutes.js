@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const { User } = require('../models');
+const { User, Exercise, Nutrition } = require('../models');
 const { fetchExerciseData, selectWeeklyExercises } = require('./api/apiExercise');
 const { fetchRecipeData } = require('./api/apiNutrition');
 

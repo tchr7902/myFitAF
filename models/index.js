@@ -1,6 +1,6 @@
-const User = require('./User.js');
-const Exercise = require('./exercise.js'); // Represents exercise_plans
-const Nutrition = require('./nutrition.js'); // Represents diet_plans
+const User = require('./user');
+const Exercise = require('./exercise'); // Represents exercise_plans
+const Nutrition = require('./nutrition'); // Represents diet_plans
 
 // Define model associations here
 User.hasMany(Exercise, { foreignKey: 'userId', onDelete: 'CASCADE' });
