@@ -11,7 +11,7 @@ const db = require('./db/database');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.JAWSDB_PORT || 3306;
 
 // Middleware and other setup
 app.use(express.urlencoded({ extended: true }));
