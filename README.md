@@ -44,6 +44,9 @@ Support
 
 For any assistance or feedback, please reach out to us at support@fitaf.com. (not working)
 
+Deployed Application
+[FitAF](https://obscure-fortress-24309-48af1362b968.herokuapp.com/dashboard)
+
 Contributing
 We welcome contributions and suggestions to improve FitAF. Please read our contributing guidelines before submitting your proposals.
 
