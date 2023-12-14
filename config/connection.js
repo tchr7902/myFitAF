@@ -1,3 +1,5 @@
+console.log('Connection string:', process.env.JAWSDB_CONNECTION_STRING);
+
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
