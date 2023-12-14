@@ -57,3 +57,10 @@ const storeMealPlan = (userId, mealPlan) => {
     .then(() => console.log('Meal plan stored for user:', userId))
     .catch(err => console.error('Error storing meal plan:', err));
 };
+
+// Sync the models with the database
+sequelize.sync()
+  .then(() => console.log('Models synced with database'))
+  .catch(err => console.error('Error syncing models with database:', err));
+
+module.exports = { storeExercisePlan, storeMealPlan, sequelize };
