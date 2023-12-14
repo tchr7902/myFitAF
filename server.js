@@ -27,7 +27,7 @@ console.log('Views Directory:', app.get('views'));
 
 // Session setup
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'secret',
   resave: false,
   saveUninitialized: true,
 }));
