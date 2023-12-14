@@ -1,44 +1,59 @@
 require('dotenv').config();
-const mysql = require('mysql2');
+const { Sequelize, DataTypes } = require('sequelize');
 
-// Database connection setup using environment variables
-const db = mysql.createConnection({
-    host: process.env.JAWSDB_HOST,
-    user: process.env.JAWSDB_USER,
-    password: process.env.JAWSDB_PASSWORD,
-    database: process.env.JAWSDB_NAME
+const sequelize = new Sequelize(process.env.JAWSDB_CONNECTION_STRING, {
+  dialect: 'mysql',
+  dialectOptions: {
+    ssl: {
+      ca: process.env.SSL_CA,
+    },
+  },
+});
+
+// Define ExercisePlan model
+const ExercisePlan = sequelize.define('ExercisePlan', {
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  exercise_details: {
+    type: DataTypes.JSON,
+    allowNull: false,
+  },
+});
+
+// Define MealPlan model
+const MealPlan = sequelize.define('MealPlan', {
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  day: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  meal_details: {
+    type: DataTypes.JSON,
+    allowNull: false,
+  },
 });
 
 // Function to store exercise plan
 const storeExercisePlan = (userId, exercisePlan) => {
-    exercisePlan.forEach(plan => {
-        const query = 'INSERT INTO exercise_plans (user_id, exercise_details) VALUES (?, ?)';
-        db.query(query, [userId, JSON.stringify(plan)], (err, result) => {
-            if (err) throw err;
-            console.log('Exercise plan stored for user:', userId);
-        });
-    });
+  ExercisePlan.bulkCreate(exercisePlan.map(plan => ({ user_id: userId, exercise_details: plan })))
+    .then(() => console.log('Exercise plan stored for user:', userId))
+    .catch(err => console.error('Error storing exercise plan:', err));
 };
 
 // Function to store meal plan
 const storeMealPlan = (userId, mealPlan) => {
-    Object.entries(mealPlan).forEach(([day, meals]) => {
-        const query = 'INSERT INTO meal_plans (user_id, day, meal_details) VALUES (?, ?, ?)';
-        db.query(query, [userId, day, JSON.stringify(meals)], (err, result) => {
-            if (err) throw err;
-            console.log('Meal plan stored for user:', userId);
-        });
-    });
+  const mealPlanEntries = Object.entries(mealPlan).map(([day, meals]) => ({
+    user_id: userId,
+    day,
+    meal_details: meals,
+  }));
+
+  MealPlan.bulkCreate(mealPlanEntries)
+    .then(() => console.log('Meal plan stored for user:', userId))
+    .catch(err => console.error('Error storing meal plan:', err));
 };
-
-function connectDatabase() {
-    db.connect(err => {
-        if (err) {
-            console.error('Error connecting to the database:', err);
-            process.exit(1);
-        }
-        console.log('Connected to MySQL database');
-    });
-}
-
-module.exports = { storeExercisePlan, storeMealPlan, connectDatabase };
