@@ -1,12 +1,14 @@
+require('dotenv').config();
 console.log('Connection string:', process.env.JAWSDB_CONNECTION_STRING);
 
 const Sequelize = require('sequelize');
-require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.JAWSDB_CONNECTION_STRING, {
   dialect: 'mysql',
   dialectOptions: {
-    ssl: 'Amazon RDS',
+    ssl: {
+      ca: process.env.SSL_CA,
+    },
   },
 });
 
