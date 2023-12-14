@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS user_db;
-CREATE DATABASE user_db;
+DROP DATABASE IF EXISTS ivbrgbe7yof6ra9w;
+CREATE DATABASE ivbrgbe7yof6ra9w;
 
-USE user_db;
+USE ivbrgbe7yof6ra9w;
 
 CREATE TABLE user_table (
     id INT AUTO_INCREMENT PRIMARY KEY,
