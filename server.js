@@ -6,8 +6,7 @@ const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 const nutritionRoutes = require('./controllers/nutritionRoutes');
 const exerciseRoutes = require('./controllers/exerciseRoutes');
-const sequelize = require('./config/connection');
-const db = require('./db/database');
+const sequelize = require('./config/connection'); // Assuming this is your Sequelize instance
 const path = require('path');
 
 const app = express();
@@ -48,45 +47,40 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong!');
 });
 
-
-
 app.get("/", (req, res) => {
   res.render("homepage", {
       pageTitle: "Welcome to Fit AF!"
-  })
-})
-
+  });
+});
 
 app.get("/cart", (req, res) => {
   res.render("cartpage", {
       pageTitle: "Shopping Cart"
-  })
-})
+  });
+});
 
 app.get("/recipesearch", (req, res) => {
   res.render("recipesearchpage", {
       pageTitle: "Recipes"
-  })
-})
+  });
+});
 
 app.get("/login", (req, res) => {
   res.render("login", {
       layout: "forlogin",
       pageTitle: "Login"
-  })
-})
+  });
+});
 
 app.get("/dashboard", (req, res) => {
   res.render("dashboard", {
       pageTitle: "Dashboard"
-  })
-})
-
+  });
+});
 
 // Sync Sequelize models and then start the server
-db.sync({ force: false }).then(async () => {
+sequelize.sync({ force: false }).then(async () => {
   try {
-    
     app.listen(SERVER_PORT, () => {
       console.log(`Server running on http://localhost:${SERVER_PORT}`);
     });
