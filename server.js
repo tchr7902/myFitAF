@@ -84,11 +84,11 @@ app.get("/dashboard", (req, res) => {
 
 
 // Sync Sequelize models and then start the server
-sequelize.sync({ force: false }).then(async () => {
+db.sync({ force: false }).then(async () => {
   try {
     
     app.listen(SERVER_PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Server running on http://localhost:${SERVER_PORT}`);
     });
   } catch (error) {
     console.error('Unable to connect to the database:', error);
