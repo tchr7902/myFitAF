@@ -11,7 +11,7 @@ const db = require('./db/database');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.JAWSDB_PORT || 3306;
+const SERVER_PORT = process.env.PORT || 3000;
 
 // Middleware and other setup
 app.use(express.urlencoded({ extended: true }));
@@ -87,7 +87,7 @@ app.get("/dashboard", (req, res) => {
 sequelize.sync({ force: false }).then(async () => {
   try {
     
-    app.listen(PORT, () => {
+    app.listen(SERVER_PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
   } catch (error) {
